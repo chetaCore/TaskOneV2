@@ -24,5 +24,10 @@ namespace Assets.Game.Scripts.SetImage
             _animSequence.Kill();
             _spriteTransform.rotation = Quaternion.identity;
         }
+
+        private void OnDestroy()
+        {
+            _animSequence.Kill();
+        }
     }
 }

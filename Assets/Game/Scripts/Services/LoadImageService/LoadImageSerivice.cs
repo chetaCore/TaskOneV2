@@ -8,29 +8,37 @@ namespace Assets.Game.Scripts.Services.LoadImageService
     {
         public async Task<Sprite> DownloadImageAsync(string imageUrl)
         {
-            using (UnityWebRequest www = UnityWebRequestTexture.GetTexture(imageUrl))
+            try
             {
-                var requestOperation = www.SendWebRequest();
-
-                while (!requestOperation.isDone)
+                using (UnityWebRequest www = UnityWebRequestTexture.GetTexture(imageUrl))
                 {
-                    await Task.Delay(300);
-                }
+                    var requestOperation = www.SendWebRequest();
 
-                if (www.result == UnityWebRequest.Result.ConnectionError || www.result == UnityWebRequest.Result.ProtocolError)
-                {
-                    Debug.Log("Ошибка загрузки картинки: " + www.error);
-                    return null;
-                }
-                else
-                {
-                    Texture2D texture = DownloadHandlerTexture.GetContent(www);
+                    while (!requestOperation.isDone)
+                    {
+                        await Task.Delay(300);
+                    }
 
-                    Sprite sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), Vector2.one * 0.5f);
+                    if (www.result == UnityWebRequest.Result.ConnectionError || www.result == UnityWebRequest.Result.ProtocolError)
+                    {
+                        Debug.Log("Ошибка загрузки картинки: " + www.error);
+                        return null;
+                    }
+                    else
+                    {
+                        Texture2D texture = DownloadHandlerTexture.GetContent(www);
 
-                    return sprite;
+                        Sprite sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), Vector2.one * 0.5f);
+
+                        return sprite;
+                    }
                 }
             }
+            catch
+            {
+                Debug.Log("Загрузка отменена, произошла смена сцены");
+            }
+            return null;
         }
     }
 }
