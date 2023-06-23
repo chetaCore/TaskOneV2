@@ -19,8 +19,6 @@ namespace Assets.Game.Scripts.State
         {
             AsyncOperation waitNextScene = SceneManager.LoadSceneAsync(nextScene, LoadSceneMode.Single);
 
-            popup = null;
-
             if (popup == null)
             {
                 while (!waitNextScene.isDone)
@@ -31,7 +29,7 @@ namespace Assets.Game.Scripts.State
             else
             {
                 float progress = 0f;
-                float loadSpeed = 0.1f;
+                float loadSpeed = 0.5f;
 
                 while (progress < 1f)
                 {

@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace Assets.Game.Scripts.Services.SceneTransitionVerificationService
+namespace Assets.Game.Scripts.Services
 {
     public class SceneTransitionVerificationService : ISceneTransitionVerificationService
     {
@@ -11,7 +11,6 @@ namespace Assets.Game.Scripts.Services.SceneTransitionVerificationService
             switch (SceneManager.GetActiveScene().name)
             {
                 case "ViewingGalleryImage":
-                    Screen.orientation = ScreenOrientation.Portrait;
                     AllServices.Container.Single<IGameStateMachine>().Enter<LoadLevelState, string>("Gallery");
                     break;
 

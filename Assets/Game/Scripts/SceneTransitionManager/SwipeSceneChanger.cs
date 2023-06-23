@@ -4,11 +4,11 @@ namespace Assets.Game.Scripts.Services.SwipeSceneLoader
 {
     public class SwipeSceneChanger : MonoBehaviour, ISceneTransitionManager
     {
-        private SceneTransitionVerificationService.SceneTransitionVerificationService _sceneTransition;
+        private ISceneTransitionVerificationService _sceneTransition;
 
         private void Awake()
         {
-            _sceneTransition = AllServices.Container.Single<SceneTransitionVerificationService.SceneTransitionVerificationService>();
+            _sceneTransition = AllServices.Container.Single<ISceneTransitionVerificationService>();
         }
 
         private void Update()
@@ -35,6 +35,10 @@ namespace Assets.Game.Scripts.Services.SwipeSceneLoader
                         _sceneTransition.CheckAndPerformSceneTransition();
                     }
                 }
+            }
+            else if (Input.GetKeyUp(KeyCode.Escape))
+            {
+                _sceneTransition.CheckAndPerformSceneTransition();
             }
         }
     }

@@ -29,5 +29,6 @@ public class PopupController : MonoBehaviour
         hideSeq.Append(Curtain.DOFade(0, 1f)).
             SetEase(Ease.Linear).
             OnComplete(() => hideSeq.Kill());
+        gameObject.SetActive(false);
     }
 }

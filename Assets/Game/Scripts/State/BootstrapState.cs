@@ -1,6 +1,5 @@
 ﻿using Assets.Game.Scripts.Services;
 using Assets.Game.Scripts.Services.LoadImageService;
-using Assets.Game.Scripts.Services.SceneTransitionVerificationService;
 
 namespace Assets.Game.Scripts.State
 {
@@ -38,9 +37,9 @@ namespace Assets.Game.Scripts.State
         private void RegisterServices()
         {
             _services.RegisterSingle<IGameStateMachine>(_stateMachine);
+            _services.RegisterSingle<ISceneTransitionVerificationService>(new SceneTransitionVerificationService());
             _services.RegisterSingle<ILoadImageSerivice>(new LoadImageSerivice());
             _services.RegisterSingle<GetSelectedGalleryImageService>(new GetSelectedGalleryImageService());
-            _services.RegisterSingle<ISceneTransitionVerificationService>(new SceneTransitionVerificationService());
         }
     }
 }
