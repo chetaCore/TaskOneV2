@@ -9,10 +9,17 @@ namespace Assets.Game.Scripts.ScreenOrientationSwitcher
         public bool allowLandscapeLeft = true;
         public bool allowLandscapeRight = true;
 
+
         private void Start()
         {
             SetAllowedOrientations();
             Screen.orientation = ScreenOrientation.AutoRotation;
+
+        }
+
+        private void OnDestroy()
+        {
+            Screen.orientation = ScreenOrientation.Portrait;
         }
 
         public void SetAllowedOrientations()

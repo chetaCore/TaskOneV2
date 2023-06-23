@@ -13,7 +13,6 @@ namespace Assets.Game.Scripts.TransferButtons
         {
             _transitionButton.onClick.AddListener(() =>
             {
-                Screen.orientation = ScreenOrientation.AutoRotation;
                 AllServices.Container.Single<IGameStateMachine>().Enter<LoadLevelState, string>("Gallery");
             });
         }
