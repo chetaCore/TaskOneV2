@@ -2,25 +2,27 @@
 
 namespace Assets.Game.Scripts.ScreenOrientationSwitcher
 {
-    public class ScreenOrientationSwitcher: MonoBehaviour
+    public class ScreenOrientationSwitcher : MonoBehaviour
     {
-        public bool allowPortrait = true;
-        public bool allowPortraitUpsideDown = false;
-        public bool allowLandscapeLeft = true;
-        public bool allowLandscapeRight = true;
+        public Orientations orientations;
+        private ScreenOrientation _defaultOrintaton;
+
+        public enum Orientations
+        {
+            PortraitOrientation,
+            LandscapeOrientation,
+            AutoOrientation
+        }
 
         private void Start()
         {
-            SetAllowedOrientations();
+            _defaultOrintaton = Screen.orientation;
             Screen.orientation = ScreenOrientation.AutoRotation;
         }
 
-        public void SetAllowedOrientations()
+        private void OnDestroy()
         {
-            Screen.autorotateToPortrait = allowPortrait || Screen.orientation == ScreenOrientation.Portrait;
-            Screen.autorotateToPortraitUpsideDown = allowPortraitUpsideDown || Screen.orientation == ScreenOrientation.PortraitUpsideDown;
-            Screen.autorotateToLandscapeLeft = allowLandscapeLeft || Screen.orientation == ScreenOrientation.LandscapeLeft;
-            Screen.autorotateToLandscapeRight = allowLandscapeRight || Screen.orientation == ScreenOrientation.LandscapeRight;
+            Screen.orientation = _defaultOrintaton;
         }
     }
 }
