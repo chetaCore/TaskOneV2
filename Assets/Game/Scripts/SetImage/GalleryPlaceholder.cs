@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace Assets.Game.Scripts.SetImage
 {
@@ -16,15 +17,23 @@ namespace Assets.Game.Scripts.SetImage
             GameObject newElement;
             for (int i = 1; i <= Constans.GallaryImageCount; i++)
             {
-                newElement = Instantiate(_gallaryElement);
-                newElement.GetComponent<RectTransform>().SetParent(transform, false);
+                try
+                {
+                    newElement = Instantiate(_gallaryElement);
+                    newElement.GetComponent<RectTransform>().SetParent(transform, false);
 
-                if (newElement.TryGetComponent(out DownloadAnimation animation))
-                    animation.StartAnimation();
+                    if (newElement.TryGetComponent(out DownloadAnimation animation))
+                        animation.StartAnimation();
 
-                await newElement.GetComponent<URlSpriteInstaller>().SetSprite(Constans.GallaryImageUrl + i + ".jpg");
+                    await newElement.GetComponent<URlSpriteInstaller>().SetSprite(Constans.GallaryImageUrl + i + ".jpg");
 
-                animation?.StopAnimation();
+                    animation?.StopAnimation();
+                }
+                catch (Exception)
+                {
+                    Debug.Log("Создание элемента не может быть создан, переход на другую сцену");
+                    break;
+                }
             }
         }
     }
