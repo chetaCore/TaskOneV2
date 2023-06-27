@@ -1019,4 +1019,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63776dc8553ec2642bd9e071962b527f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  orientations: 2
+  orientations: 0

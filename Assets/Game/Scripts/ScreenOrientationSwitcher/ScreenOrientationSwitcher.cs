@@ -24,12 +24,9 @@ namespace Assets.Game.Scripts.ScreenOrientationSwitcher
 
         private void OnDestroy()
         {
-            Screen.orientation = ScreenOrientation.Portrait;
-        }
-
-        private void OnDestroy()
-        {
             Screen.orientation = _defaultOrintaton;
         }
+
+    
     }
 }
